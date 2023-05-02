@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       return {
-        id:dbUser.id,
+        id: dbUser.id,
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
@@ -51,7 +51,16 @@ export const authOptions: NextAuthOptions = {
     async session({session, token}) {
       if (token) {
         session.user.id = token.id
+        session.user.email = token.email
+        session.user.name = token.name
+        session.user.image = token.picture
       }
+
+      return session
+    },
+    redirect() {
+      return '/dashboard'
     }
+
   }
 }
