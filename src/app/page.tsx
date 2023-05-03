@@ -1,10 +1,10 @@
 import Button from "@/components/ui/Button"
-import { db } from "./lib/db"
+import { db } from "../lib/db"
 
 export default async function Home() {
-  // await db.set('Hello', 'hello')
+  await db.set('Hello', 'hello')
   
   return (
-    <Button variant='ghost'>Hello, World.</Button>
+    <Button variant='default'>Hello, World.</Button>
   )
 }
