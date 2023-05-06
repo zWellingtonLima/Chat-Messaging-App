@@ -15,9 +15,7 @@ type FormData = z.infer<typeof addFriendValidator>
 const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
   const [showSuccessState, setShowSuccessState] = useState<boolean>(false)
 
-  const {
-    register, handleSubmit
-  } = useForm<FormData>({
+  const { register, handleSubmit } = useForm<FormData>({
     resolver: zodResolver(addFriendValidator),
   })
 
