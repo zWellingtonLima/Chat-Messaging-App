@@ -15,7 +15,7 @@ type FormData = z.infer<typeof addFriendValidator>
 const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
   const [showSuccessState, setShowSuccessState] = useState<boolean>(false)
 
-  const { register, handleSubmit } = useForm<FormData>({
+  const { register, handleSubmit, setError } = useForm<FormData>({
     resolver: zodResolver(addFriendValidator),
   })
 
@@ -30,12 +30,16 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
       setShowSuccessState(true)
     } catch (error) {
       if (error instanceof z.ZodError) {
+        setError('email', { message: error.message })
         return        
       }
 
       if (error instanceof AxiosError) {
+        setError('email', { message: error.response?.data })
         return
       }
+
+      setError('email', {message: 'Something went wrong.'})
     }
   }
 
